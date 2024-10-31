@@ -10,18 +10,14 @@ defmodule AppWeb.Api.V1.RanksController do
   renders limited list of the most ranked for document_key documents
   """
   def show(con, %{"document_key" => key} = params) do
-    models = with {:ok, list} <- Map.fetch(params, "models")
-    do
-      String.split(list, ",")
-    else
+    models = case Map.fetch(params, "models") do
+      {:ok, list} -> String.split(list, ",")
       :error ->
         Similarity.Model.active
         |> Enum.map(fn m -> m.name end)
     end
-    with {:ok, res} <- Api.V1.Ranks.Show.call(key, %{models: models})
-    do
-      json(con, res)
-    else
+    case  Api.V1.Ranks.Show.call(key, %{models: models}) do
+      {:ok, res} -> json(con, res)
       {:error, err} ->
         con
         |> put_status(:unprocessable_entity)

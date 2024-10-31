@@ -1,7 +1,7 @@
 tst:
 	mix test
 lint:
-	mix credo
+	mix credo --strict --all
 routes:
 	mix phx.routes
 server:

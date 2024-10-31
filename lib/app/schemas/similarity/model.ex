@@ -1,4 +1,11 @@
 defmodule Similarity.Model do
+  @moduledoc """
+  statistical model
+  name - unique internal behavior identifier
+
+  their knows how to select ranking strategy for model
+  """
+
   use Ecto.Schema
   import Ecto.Query
 
@@ -16,5 +23,19 @@ defmodule Similarity.Model do
       where: m.state == :enabled,
       select: m
     App.Repo.all(q)
+  end
+
+  @doc """
+  select ranking strategy for model
+  """
+  def strategy(model) do
+    case model.name do
+      "tf_idf" ->
+        Similarity.Strategy.Ranking.TfIdf
+      "bm25" ->
+        Similarity.Strategy.Ranking.Bm25
+      _ ->
+        Similarity.Strategy.Ranking.None
+    end
   end
 end
