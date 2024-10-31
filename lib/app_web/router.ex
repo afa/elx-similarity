@@ -15,13 +15,15 @@ defmodule AppWeb.Router do
 
       scope "/texts", as: :texts do
         get "/", TextsController, :index
-        post "/", TextsController, :create
-        put "/:document_key", TextsController, :update
-        delete "/:document_key", TextsController, :destroy
+        get "/search", TextsController, :search
+        post "/create", TextsController, :create
+        post "/update/:identifier", TextsController, :update
+        delete "/:identifier", TextsController, :destroy
       end
 
       scope "/ranks", as: :ranks do
         get "/:document_key", RanksController, :show
+        post "/clean", RanksController, :clean
       end
 
       get "/", DashboardController, :index

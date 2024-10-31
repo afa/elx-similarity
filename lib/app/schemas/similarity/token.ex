@@ -1,4 +1,9 @@
 defmodule Similarity.Token do
+  @moduledoc """
+  token model
+  value: raw token
+  """
+
   use Ecto.Schema
   import Ecto.Query
 

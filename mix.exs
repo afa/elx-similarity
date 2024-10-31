@@ -42,7 +42,11 @@ defmodule App.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:unicode_string, "~> 1.0"},
+      {:math, "~> 0.7.0"},
       {:bandit, "~> 1.5"},
+      {:result, "~> 1.7"},
+      { :uuid, "~> 1.1" },
+      {:drops, "~> 0.2.0"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end

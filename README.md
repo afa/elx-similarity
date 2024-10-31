@@ -9,3 +9,9 @@
 * `/api/v1/texts` get -- registered texts entry
 
 * `/api/v1/ranks` get -- ranked similar documents (for each lang model)
+
+## TODO
+
+* Bayesian model
+
+* naive search by tokens, search ranks

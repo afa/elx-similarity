@@ -1,4 +1,8 @@
 defmodule Similarity.DocumentRank do
+  @moduledoc """
+  stores calculated rank between left and right document
+  """
+
   use Ecto.Schema
 
   schema "similarity_document_rank" do

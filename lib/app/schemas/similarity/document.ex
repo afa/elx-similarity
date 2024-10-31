@@ -1,4 +1,10 @@
 defmodule Similarity.Document do
+  @moduledoc """
+  document model
+  main_object: external document key
+  name, text: tokenizable text, stored for indexing
+  """
+
   use Ecto.Schema
   import Ecto.Query
 

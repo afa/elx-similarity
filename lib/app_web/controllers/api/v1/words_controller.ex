@@ -6,4 +6,3 @@ defmodule AppWeb.Api.V1.WordsController do
     |> json([:some, %{a: 1}])
   end
 end
-
