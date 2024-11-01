@@ -114,9 +114,4 @@ defmodule Similarity.Strategy.Ranking.TfIdf do
     (up / (Math.sqrt(d1 * d2)))
     |> Result.ok
   end
-
-  defp sum_square(list) do
-    Enum.map(list, fn x -> x * x end)
-    |> Enum.reduce(0, &(&1 + &2))
-  end
 end

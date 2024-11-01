@@ -2,6 +2,7 @@ defmodule Similarity.Strategy.Ranking.TfIdfTest do
   use ExUnit.Case
   use App.DataCase
   import App.Factory
+  alias Similaritr.Strategy.Ranking
 
   setup do
     tf_idf = insert!(:model, %{name: "tf_idf", state: :enabled})
@@ -23,7 +24,7 @@ defmodule Similarity.Strategy.Ranking.TfIdfTest do
   end
 
   test "test ranking", state do
-    {:ok, res} = Similarity.Strategy.Ranking.TfIdf.call(hd(state[:docs]).id)
+    {:ok, res} = Ranking.TfIdf.call(hd(state[:docs]).id)
     assert(is_list(res))
     [data | _] = res
     assert(is_tuple(data))

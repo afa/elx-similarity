@@ -1,6 +1,6 @@
 defmodule AppWeb.Api.V1.RanksController do
   use AppWeb, :controller
-  # require OK
+  alias Api.V1.Ranks
 
   @moduledoc """
   API for documents ranks
@@ -16,7 +16,7 @@ defmodule AppWeb.Api.V1.RanksController do
         Similarity.Model.active
         |> Enum.map(fn m -> m.name end)
     end
-    case  Api.V1.Ranks.Show.call(key, %{models: models}) do
+    case  Ranks.Show.call(key, %{models: models}) do
       {:ok, res} -> json(con, res)
       {:error, err} ->
         con
