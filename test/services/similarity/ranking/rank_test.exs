@@ -1,8 +1,8 @@
-defmodule Similarity.Strategy.Ranking.TfIdfTest do
+defmodule Similarity.RankTest do
   use ExUnit.Case
   use App.DataCase
   import App.Factory
-  alias Similarity.Strategy.Ranking
+  alias Similarity.Ranking.Rank
 
   setup do
     tf_idf = insert!(:model, %{name: "tf_idf", state: :enabled})
@@ -20,17 +20,17 @@ defmodule Similarity.Strategy.Ranking.TfIdfTest do
     insert!(:token_count, document_id: doc1.id, token_id: t0.id, count: 1)
     insert!(:token_count, document_id: doc2.id, token_id: t2.id, count: 2)
     insert!(:token_count, document_id: doc2.id, token_id: t3.id, count: 1)
-    {:ok, models: [tf_idf: tf_idf, bm25: bm25], doc1: doc1, doc2: doc2}
+    {:ok, models: [tf_idf: tf_idf, bm25: bm25], docs: [doc1, doc2]}
   end
 
   test "test ranking", state do
-    doccounts = %{"test1" => 2, "test" => 1, "test0" => 1}
-    doccounts_2 = %{"test2" => 2, "test" => 1, "test3" => 1}
-    {:ok, res} = Ranking.TfIdf.call(state[:doc1].id, doccounts, 2, state[:doc2].id, doccounts_2)
-    assert(is_tuple(res))
-    {doc, ranked, val} = res
-    assert(doc == state[:doc1].id)
-    assert(ranked == state[:doc2].id)
+    {:ok, res} = Rank.call(hd(state[:docs]).id)
+    assert(is_list(res))
+    [data | _] = res
+    assert(is_tuple(data))
+    {doc, ranked, val} = data
+    assert(doc == hd(state[:docs]).id)
+    assert(ranked == hd(tl(state[:docs])).id)
     assert(is_number(val))
   end
 end
