@@ -2,6 +2,7 @@ defmodule AppWeb.Api.V1.Ranks.ShowTest do
   use ExUnit.Case
   use App.DataCase
   import App.Factory
+  alias Api.V1.Ranks
 
   setup do
     model = insert!(:model, %{name: "tf_idf", state: :enabled})
@@ -19,7 +20,7 @@ defmodule AppWeb.Api.V1.Ranks.ShowTest do
   end
 
   test "load ranks for tf_idf" do
-    {:ok, res} = Api.V1.Ranks.Show.call("test1", %{models: ["tf_idf"]})
+    {:ok, res} = Ranks.Show.call("test1", %{models: ["tf_idf"]})
     assert(Map.has_key?(res.ranks, "tf_idf"))
     {:ok, list} = Map.fetch(res.ranks, "tf_idf")
     assert(length(list) == 2)
