@@ -2,6 +2,8 @@ defmodule Similarity.Ranking.Rank do
   @moduledoc """
   build ranks for document, calculating ranks with it for corpus
   limited only by model
+
+  returns result tuple with list ids/rank tuples calculated by strategy
   """
 
   import Ecto.Query

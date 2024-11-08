@@ -1,7 +1,14 @@
 defmodule Similarity.Strategy.Ranking.TfIdf do
   @moduledoc """
-  build ranks for document, calculating ranks with it for corpus
-  limited only by model
+  calculating similarity using tf-idf model
+
+  doc_id: internal document id for rankable document
+  doc_counts: map with token => count in doc pairs
+  total: documents count in corpus
+  rank_id: same as doc_id for document with wich doc_id will be ranked
+  ranc_counts: same as doc_counts for rank document
+
+  return tuple with doc_id, rank_id and calculated rank between them
   """
 
   require Result
